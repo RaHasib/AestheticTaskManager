@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Serif+Pro:wght@400;600&display=swap');
+
+@layer base {
+  :root {
+    --forest-green: #065125;
+    --gold: #DDA033;
+    --flame: #E2532F;
+    --bone: #E0D8C3;
+    --vintage-blue: #0D97AC;
+    
+    --primary: var(--forest-green);
+    --background: var(--bone);
+    --surface: #F5F2E9;
+    --text: #2C1810;
+    --accent: var(--gold);
+    --highlight: var(--flame);
+  }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Source Serif Pro', serif;
+    background-color: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+    background-image: 
+      linear-gradient(to right, #F5F2E9 1px, transparent 1px),
+      linear-gradient(to bottom, #F5F2E9 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--surface);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 0;
+  }
+}
+
+@layer components {
+  .vintage-container {
+    @apply bg-[#F5F2E9] border border-[#DDA033] shadow-md;
+    box-shadow: 2px 2px 15px rgba(221, 160, 51, 0.1);
+    background-image: 
+      linear-gradient(0deg, rgba(6, 81, 37, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6, 81, 37, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: center center;
+  }
+
+  .vintage-item {
+    @apply bg-[#F5F2E9]/90 border-b border-[#DDA033] hover:bg-[#F5F2E9]
+           transition-all duration-300 ease-in-out mb-2 p-3;
+  }
+
+  .vintage-item-dragging {
+    @apply shadow-lg bg-[#F5F2E9] border border-[#DDA033] rotate-1;
+    animation: dragStart 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  @keyframes dragStart {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    100% {
+      transform: scale(1.02) rotate(1deg);
+    }
+  }
+
+  .vintage-button {
+    @apply border border-[#065125] px-4 py-2 text-sm transition-all duration-200
+           hover:bg-[#065125] hover:text-[#E0D8C3] font-serif;
+  }
+
+  .vintage-input {
+    @apply bg-[#F5F2E9] border-b border-[#DDA033] focus:border-[#065125] 
+           text-[#2C1810] placeholder-[#DDA033]/70 font-serif;
+  }
+
+  .vintage-heading {
+    font-family: 'Playfair Display', serif;
+    @apply text-[#065125];
+    text-shadow: 2px 2px 0px rgba(221, 160, 51, 0.2);
+  }
+
+  .vintage-select {
+    @apply bg-[#F5F2E9] border border-[#DDA033] text-[#065125] 
+           focus:border-[#065125] font-serif;
+  }
+
+  .vintage-icon {
+    @apply text-[#065125] opacity-70 hover:opacity-100 transition-opacity;
+  }
+
+  .vintage-chip {
+    @apply bg-[#F5F2E9] border border-[#DDA033] text-[#065125] text-xs px-2 py-0.5;
+  }
+
+  .priority-high {
+    @apply text-[#E2532F];
+  }
+
+  .priority-medium {
+    @apply text-[#DDA033];
+  }
+
+  .priority-low {
+    @apply text-[#0D97AC];
+  }
+
+  /* Cool animation for completed tasks */
+  .task-complete-animation {
+    animation: taskComplete 0.4s ease-in-out;
+  }
+
+  @keyframes taskComplete {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  /* Cool hover effect for items */
+  .vintage-item-hover {
+    @apply relative overflow-hidden;
+    &:before {
+      content: '';
+      @apply absolute inset-0 bg-[#DDA033]/5 opacity-0 transition-opacity duration-300;
+    }
+    &:hover:before {
+      @apply opacity-100;
+    }
+  }
+
+  .drag-handle-hover {
+    @apply relative overflow-hidden;
+    &:before {
+      content: '';
+      @apply absolute inset-0 bg-[#065125]/5 opacity-0 transition-opacity duration-300 rounded-md;
+    }
+    &:hover:before {
+      @apply opacity-100;
+    }
+  }
+}
+
+/* Update the scrollbar styles */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+  border-radius: 3px;
+}
+
+

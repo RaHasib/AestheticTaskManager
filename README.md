@@ -2,7 +2,7 @@
 
 A beautifully crafted task management application built with modern web technologies and a vintage-inspired design aesthetic.
 
-![Aesthetic Task Manager](public\Asset\img\AestheticTask.png)
+![Aesthetic Task Manager](public/Asset/img/AestheticTask.png)
 
 ## ✨ Features
 

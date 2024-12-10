@@ -4,6 +4,11 @@ A beautifully crafted task management application built with modern web technolo
 
 ![Aesthetic Task Manager](public/Asset/img/AestheticTask.png)
 
+## 🌟 Live Preview
+
+Check out the live demo: [Aesthetic Task Manager](https://aesthetic-task-manager.vercel.app/)
+
+
 ## ✨ Features
 
 - **Elegant Design**: Vintage-inspired aesthetics with modern functionality
@@ -12,7 +17,6 @@ A beautifully crafted task management application built with modern web technolo
 - **Filtering & Search**: Easily find tasks with powerful filtering options
 - **Responsive**: Works seamlessly on all devices
 - **Local Storage**: Tasks persist between sessions
-- **Keyboard Accessible**: Full keyboard navigation support
 
 ## 🛠️ Built With
 

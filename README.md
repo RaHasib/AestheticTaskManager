@@ -2,7 +2,7 @@
 
 A beautifully crafted task management application built with modern web technologies and a vintage-inspired design aesthetic.
 
-![Aesthetic Task Manager](screenshot.png)
+![Aesthetic Task Manager](public\Asset\img\AestheticTask.png)
 
 ## ✨ Features
 
@@ -68,6 +68,7 @@ src/
 │   │   └── TodoStats.js
 │   └── layout/
 │       └── Footer.js
+|       └── Loader.js
 ├── constants/
 │   └── categories.js
 ├── hooks/
@@ -82,7 +83,7 @@ src/
 ## 📱 Features in Detail
 
 ### Task Management
-- Create, edit, and delete tasks
+- Create, delete tasks
 - Mark tasks as complete
 - Star important tasks
 - Categorize tasks

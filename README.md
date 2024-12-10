@@ -26,12 +26,12 @@ A beautifully crafted task management application built with modern web technolo
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/aesthetic-task-manager.git
+   git clone https://github.com/RaHasib/AestheticTaskManager.git
    ```
 
 2. **Install dependencies**
    ```bash
-   cd aesthetic-task-manager
+   cd AestheticTaskManager
    npm install
    ```
 

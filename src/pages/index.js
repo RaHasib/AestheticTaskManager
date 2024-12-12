@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import TodoList from '../components/TodoList/TodoList';
 import Footer from '../components/layout/Footer';
+import Header from '../components/layout/Header';
 import Loader from '../components/layout/Loader';
+import { motion } from 'framer-motion';
 
 function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500); // Adjust time as needed
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -31,20 +32,26 @@ function Home() {
       {loading ? (
         <Loader />
       ) : (
-        <div className="min-h-screen flex flex-col justify-between animate-fadeIn">
-          <main className="w-full py-8 px-4">
+        <motion.div 
+          className="min-h-screen flex flex-col justify-between"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <main className="w-full py-4 px-4">
             <div className="container mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-              <h1 className="vintage-heading text-4xl mb-2 text-center font-semibold">
-                Aesthetic Task Manager
-              </h1>
-              <p className="text-[#065125]/70 mb-8 text-center font-serif italic">
-                Organize your tasks with elegance
-              </p>
-              <TodoList />
+              <Header />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+              >
+                <TodoList />
+              </motion.div>
             </div>
           </main>
           <Footer />
-        </div>
+        </motion.div>
       )}
     </>
   );

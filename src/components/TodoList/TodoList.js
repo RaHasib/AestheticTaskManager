@@ -7,6 +7,7 @@ import {
   useSensor,
   useSensors,
   DragOverlay,
+  TouchSensor,
 } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -41,7 +42,17 @@ function TodoList() {
   } = useTodoList();
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      }
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 200,
+        tolerance: 5,
+      }
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -49,10 +60,13 @@ function TodoList() {
 
   return (
       <div
-          className={`vintage-container rounded-md p-6 flex flex-col ${
+          className={`vintage-container rounded-md p-3 sm:p-6 flex flex-col ${
               filteredItems.length === 0 ? 'justify-center text-center' : 'justify-start'
           }`}
-          style={{minHeight: '60vh'}}
+          style={{
+              minHeight: '60vh',
+              maxHeight: { xs: 'calc(100vh - 120px)', sm: 'calc(100vh - 160px)' }
+          }}
       >
         <div className="flex-shrink-0 pb-4">
           <AddTodo onAdd={handleAdd}/>

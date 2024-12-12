@@ -72,6 +72,7 @@ src/
 │   │   └── TodoStats.js
 │   └── layout/
 │       └── Footer.js
+|       └── Header.js
 |       └── Loader.js
 ├── constants/
 │   └── categories.js

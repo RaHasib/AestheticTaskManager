@@ -68,7 +68,7 @@ export const useTodoList = () => {
 
   const handleCategoryChange = useCallback((id, category) => {
     setItems(prev => prev.map(item =>
-      item.id === id ? { ...item, category } : item
+      item.id === id ? { ...item, category: category || null } : item
     ));
   }, []);
 

@@ -48,77 +48,82 @@ function TodoList() {
   );
 
   return (
-    <div className="vintage-container rounded-md p-6 flex flex-col min-h-[400px] max-h-[calc(100vh-390px)]">
-      <div className="flex-shrink-0 pb-4">
-        <AddTodo onAdd={handleAdd} />
-        <TodoFilters filter={filter} setFilter={setFilter} />
-        <TodoStats 
-          filteredCount={filteredItems.length}
-          completedCount={items.filter(i => i.completed).length}
-          hasItems={items.length > 0}
-          onClearCompleted={() => setItems(prev => prev.filter(item => !item.completed))}
-        />
-      </div>
+      <div
+          className={`vintage-container rounded-md p-6 flex flex-col ${
+              filteredItems.length === 0 ? 'justify-center text-center' : 'justify-start'
+          }`}
+          style={{minHeight: '60vh'}}
+      >
+        <div className="flex-shrink-0 pb-4">
+          <AddTodo onAdd={handleAdd}/>
+          <TodoFilters filter={filter} setFilter={setFilter}/>
+          <TodoStats
+              filteredCount={filteredItems.length}
+              completedCount={items.filter(i => i.completed).length}
+              hasItems={items.length > 0}
+              onClearCompleted={() => setItems(prev => prev.filter(item => !item.completed))}
+          />
+        </div>
 
-      <div className="flex-grow overflow-y-auto pr-2">
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-          onDragCancel={handleDragCancel}
-        >
-          <SortableContext
-            items={filteredItems.map(item => item.id)}
-            strategy={verticalListSortingStrategy}
+        <div className="flex-grow overflow-y-auto pr-2">
+          <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+              onDragCancel={handleDragCancel}
           >
-            <TransitionGroup>
-              {filteredItems.length === 0 ? (
-                <Collapse>
-                  <div className="text-center text-gray-400 py-12 flex flex-col items-center gap-4">
-                    <span className="text-4xl">✨</span>
-                    {items.length === 0 ? 
-                      "Start organizing your tasks with elegance" : 
-                      "No matching tasks found"}
-                    <p className="text-sm text-gray-400">
-                      {items.length === 0 ? "Add your first task above" : "Try adjusting your filters"}
-                    </p>
-                  </div>
-                </Collapse>
-              ) : (
-                filteredItems.map(item => (
-                  <Collapse key={item.id}>
-                    <TodoItem
-                      id={item.id}
-                      content={item.content}
-                      completed={item.completed}
-                      starred={item.starred}
-                      category={item.category}
+            <SortableContext
+                items={filteredItems.map(item => item.id)}
+                strategy={verticalListSortingStrategy}
+            >
+              <TransitionGroup>
+                {filteredItems.length === 0 ? (
+                    <Collapse>
+                      <div className="text-center text-gray-400 py-12 flex flex-col items-center gap-4">
+                        <span className="text-4xl">✨</span>
+                        {items.length === 0 ?
+                            "Start organizing your tasks with elegance" :
+                            "No matching tasks found"}
+                        <p className="text-sm text-gray-400">
+                          {items.length === 0 ? "Add your first task above" : "Try adjusting your filters"}
+                        </p>
+                      </div>
+                    </Collapse>
+                ) : (
+                    filteredItems.map(item => (
+                        <Collapse key={item.id}>
+                          <TodoItem
+                              id={item.id}
+                              content={item.content}
+                              completed={item.completed}
+                              starred={item.starred}
+                              category={item.category}
+                              onDelete={handleDelete}
+                              onToggle={handleToggle}
+                              onStar={handleStar}
+                              onCategoryChange={handleCategoryChange}
+                          />
+                        </Collapse>
+                    ))
+                )}
+              </TransitionGroup>
+            </SortableContext>
+
+            <DragOverlay>
+              {activeId && activeItem && (
+                  <TodoItem
+                      {...activeItem}
                       onDelete={handleDelete}
                       onToggle={handleToggle}
                       onStar={handleStar}
                       onCategoryChange={handleCategoryChange}
-                    />
-                  </Collapse>
-                ))
+                  />
               )}
-            </TransitionGroup>
-          </SortableContext>
-
-          <DragOverlay>
-            {activeId && activeItem && (
-              <TodoItem
-                {...activeItem}
-                onDelete={handleDelete}
-                onToggle={handleToggle}
-                onStar={handleStar}
-                onCategoryChange={handleCategoryChange}
-              />
-            )}
-          </DragOverlay>
-        </DndContext>
+            </DragOverlay>
+          </DndContext>
+        </div>
       </div>
-    </div>
   );
 };
 

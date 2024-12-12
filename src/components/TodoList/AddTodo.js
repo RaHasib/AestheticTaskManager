@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { IconButton, InputBase, Paper } from '@mui/material';
+import { IconButton, InputBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { v4 as uuidv4 } from 'uuid';
 
-function AddTodo ({ onAdd }) {
+function AddTodo({ onAdd }) {
   const [content, setContent] = useState('');
 
   const handleSubmit = (e) => {
@@ -21,25 +21,30 @@ function AddTodo ({ onAdd }) {
   };
 
   return (
-    <div className="vintage-item mb-6">
-      <form onSubmit={handleSubmit} className="flex items-center px-3">
-        <InputBase
-          fullWidth
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Add a new task..."
-          className="vintage-input py-3 text-sm"
-        />
-        <IconButton 
-          type="submit" 
-          className="text-amber-700 hover:text-amber-900 transition-colors"
-          size="small"
-        >
-          <AddIcon />
-        </IconButton>
-      </form>
-    </div>
+      <div className="vintage-item mb-6">
+        <form onSubmit={handleSubmit} className="flex gap-2 items-center">
+          <InputBase
+              fullWidth
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Add a new task..."
+              className="vintage-input"
+              sx={{
+                borderBottom: 'none',
+                outline: 'none',
+                padding: '0.5rem',
+              }}
+          />
+          <IconButton
+              type="submit"
+              className="text-amber-700 hover:text-amber-900 transition-colors"
+              size="medium"
+          >
+            <AddIcon />
+          </IconButton>
+        </form>
+      </div>
   );
-};
+}
 
-export default AddTodo; 
+export default AddTodo;

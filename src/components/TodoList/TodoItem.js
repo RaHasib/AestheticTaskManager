@@ -159,6 +159,6 @@ function TodoItem ({ id, content, completed, starred, category, onDelete, onTogg
       </Menu>
     </div>
   );
-};
+}
 
 export default TodoItem; 

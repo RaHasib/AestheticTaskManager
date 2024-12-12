@@ -11,7 +11,7 @@
     --flame: #E2532F;
     --bone: #E0D8C3;
     --vintage-blue: #0D97AC;
-    
+
     --primary: var(--forest-green);
     --background: var(--bone);
     --surface: #F5F2E9;
@@ -28,9 +28,9 @@
     background-color: var(--background);
     color: var(--text);
     min-height: 100vh;
-    background-image: 
-      linear-gradient(to right, #F5F2E9 1px, transparent 1px),
-      linear-gradient(to bottom, #F5F2E9 1px, transparent 1px);
+    background-image:
+            linear-gradient(to right, #F5F2E9 1px, transparent 1px),
+            linear-gradient(to bottom, #F5F2E9 1px, transparent 1px);
     background-size: 50px 50px;
     background-position: center;
     background-attachment: fixed;
@@ -50,93 +50,123 @@
 
   ::-webkit-scrollbar-thumb {
     background: var(--primary);
-    border-radius: 0;
+    border-radius: 3px;
+  }
+
+  /* Dynamically adjust text sizes and container spacings for mobile devices */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  body, input, button, textarea {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    body, input, button, textarea {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    body, input, button, textarea {
+      font-size: 0.875rem;
+    }
   }
 }
 
+/* Components Section */
 @layer components {
+  /* Updated vintage-container for responsiveness */
   .vintage-container {
     @apply bg-[#F5F2E9] border border-[#DDA033] shadow-md;
     box-shadow: 2px 2px 15px rgba(221, 160, 51, 0.1);
-    background-image: 
-      linear-gradient(0deg, rgba(6, 81, 37, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(6, 81, 37, 0.03) 1px, transparent 1px);
+    background-image:
+            linear-gradient(0deg, rgba(6, 81, 37, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(6, 81, 37, 0.03) 1px, transparent 1px);
     background-size: 20px 20px;
     background-position: center center;
+    max-height: calc(100vh - 160px); /* Dynamically adjusted height */
+    min-height: calc(50vh);
+    padding: 2rem; /* Add padding for larger screens */
   }
 
-  .vintage-item {
-    @apply bg-[#F5F2E9]/90 border-b border-[#DDA033] hover:bg-[#F5F2E9]
-           transition-all duration-300 ease-in-out mb-2 p-3;
-  }
-
-  .vintage-item-dragging {
-    @apply shadow-lg bg-[#F5F2E9] border border-[#DDA033] rotate-1;
-    animation: dragStart 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  @keyframes dragStart {
-    0% {
-      transform: scale(1) rotate(0deg);
-    }
-    100% {
-      transform: scale(1.02) rotate(1deg);
+  @media (max-width: 768px) {
+    .vintage-container {
+      max-height: calc(100vh - 120px); /* Reduce height for smaller screens */
+      min-height: calc(50vh);
+      padding: 1rem; /* Reduce padding for smaller screens */
     }
   }
 
+  /* Adjust vintage-input for mobile responsiveness */
+  .vintage-input {
+    @apply bg-[#F5F2E9] border-b border-[#DDA033] focus:border-[#065125]
+    text-[#2C1810] placeholder-[#DDA033]/70 font-serif;
+    padding: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .vintage-input {
+      padding: 0.75rem; /* Reduce padding slightly for smaller screens */
+      width: 100%;
+    }
+  }
+
+  /* Responsive vintage-button */
   .vintage-button {
     @apply border border-[#065125] px-4 py-2 text-sm transition-all duration-200
-           hover:bg-[#065125] hover:text-[#E0D8C3] font-serif;
+    hover:bg-[#065125] hover:text-[#E0D8C3] font-serif;
+    text-align: center;
   }
 
-  .vintage-input {
-    @apply bg-[#F5F2E9] border-b border-[#DDA033] focus:border-[#065125] 
-           text-[#2C1810] placeholder-[#DDA033]/70 font-serif;
+  @media (max-width: 768px) {
+    .vintage-button {
+      width: 100%; /* Make it more accessible for touch devices */
+      padding: 0.75rem;
+    }
+  }
+
+  /* General Vintage Styling Updates */
+  .vintage-item {
+    @apply bg-[#F5F2E9]/90 border-b border-[#DDA033] hover:bg-[#F5F2E9]
+    transition-all duration-300 ease-in-out mb-2 p-3;
   }
 
   .vintage-heading {
     font-family: 'Playfair Display', serif;
     @apply text-[#065125];
     text-shadow: 2px 2px 0px rgba(221, 160, 51, 0.2);
+    text-align: center;
+    margin-bottom: 1rem;
   }
 
-  .vintage-select {
-    @apply bg-[#F5F2E9] border border-[#DDA033] text-[#065125] 
-           focus:border-[#065125] font-serif;
+  /* Smooth animations for task additions */
+  .task-enter {
+    animation: fadeInTask 0.3s ease-in-out;
   }
 
-  .vintage-icon {
-    @apply text-[#065125] opacity-70 hover:opacity-100 transition-opacity;
+  @keyframes fadeInTask {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
-  .vintage-chip {
-    @apply bg-[#F5F2E9] border border-[#DDA033] text-[#065125] text-xs px-2 py-0.5;
-  }
-
-  .priority-high {
-    @apply text-[#E2532F];
-  }
-
-  .priority-medium {
-    @apply text-[#DDA033];
-  }
-
-  .priority-low {
-    @apply text-[#0D97AC];
-  }
-
-  /* Cool animation for completed tasks */
-  .task-complete-animation {
-    animation: taskComplete 0.4s ease-in-out;
-  }
-
-  @keyframes taskComplete {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-
-  /* Cool hover effect for items */
+  /* Cool hover effect for vintage items */
   .vintage-item-hover {
     @apply relative overflow-hidden;
     &:before {
@@ -148,19 +178,20 @@
     }
   }
 
-  .drag-handle-hover {
-    @apply relative overflow-hidden;
-    &:before {
-      content: '';
-      @apply absolute inset-0 bg-[#065125]/5 opacity-0 transition-opacity duration-300 rounded-md;
-    }
-    &:hover:before {
-      @apply opacity-100;
+  /* Flex adjustments for mobile devices */
+  .flex-grow.overflow-y-auto {
+    scrollbar-gutter: stable; /* Prevent overlapping scrollbar over text */
+    padding-right: 0.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .flex-grow.overflow-y-auto {
+      padding-right: 1rem; /* Add more room for touch-based scrolling */
     }
   }
 }
 
-/* Update the scrollbar styles */
+/* Scrollbar + Overflow Styling Updates */
 .overflow-y-auto {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) transparent;
@@ -192,7 +223,7 @@
 }
 
 .vintage-loader::after {
-  content: '';  
+  content: '';
   position: absolute;
   box-sizing: border-box;
   left: 0;
@@ -216,7 +247,7 @@
   100% {
     transform: rotate(360deg);
   }
-} 
+}
 
 @keyframes rotationBack {
   0% {
